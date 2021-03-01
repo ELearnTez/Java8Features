@@ -1,0 +1,23 @@
+@Pattern(regexp = "^[0-9a-zA-Z]{4}$", message = "{name.valid}")
+
+@Bean
+	public MessageSource messageSource() {
+		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+		messageSource.setBasename("classpath:error-messages");
+		messageSource.setDefaultEncoding("UTF-8");
+		return messageSource;
+	}
+	
+	@Bean
+	public LocalValidatorFactoryBean validator() {
+		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+		bean.setValidationMessageSource(messageSource());
+		return bean;
+	}
+  
+  
+  
+  <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
